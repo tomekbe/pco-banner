@@ -307,7 +307,7 @@
             this.SMad.init();
             this.SMad.renderCTA();
 
-           // this.SMad.draw();
+          
 
         
           } // the end of window.onLoad event 
@@ -540,6 +540,10 @@
 
     SMSlide.prototype.renderSlide = function () {
 
+      var wrap = document.createElement("DIV");
+
+
+
       // rendering this slide and appending it to DOM
 
     }
@@ -550,6 +554,68 @@
       c();
       
     }
+
+
+    // SMSlideStrip 
+
+    SMSlideStrip = function (_imgSvg, sw, sh, sc, _xoffset, _yoffset) {
+
+      this.strip="";
+
+      this.imgsrc=_imgSvg;
+      this.strip_width = sw;
+      this.strip_height =sh;
+      this.strip_colour =sc;
+
+      this.copy_xoffset = _xoffset || 0;
+      this.copy_yoffset = _yoffset || 0;
+      
+
+    }
+
+    SMSlideStrip.prototype.setup = function(_imgSvg, sw, sh, sc) {
+       
+     
+    
+    }
+
+    SMSlideStrip.prototype.unmask  = function (c) {
+      // unmask and play some callback;
+      console.log(this);
+    }
+
+    SMSlideStrip.prototype.renderHTML = function () {
+
+      var _html = document.createElement("DIV");
+          _html.className="strip";
+
+      var _c = document.createElement("DIV");
+          _c.className="masker";
+      
+      var _img = document.createElement("IMG");
+
+      
+      _html.style.position  = _c.style.position  = "absolute";
+      _html.style.width = this.strip_width +"px";
+      _html.style.height = this.strip_height +"px";
+
+      _c.style.overflow ="hidden"; 
+      _c.style.width = "0px";
+
+      _c.style.top = this.copy_xoffset;
+      _c.style.left = this.copy_yoffset;
+
+      _img.src = this.imgsrc;
+
+
+      _c.appendChild(_img);
+      _html.appendChild(_c);
+
+      this.strip = _html;
+
+      return _html;
+    }
+
 
 
 
