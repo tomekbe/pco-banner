@@ -20,56 +20,14 @@
       top:0:left:0;
       width:300px;
       height:250px;
-     
-     }
+    }
 
-     #sm-add-bg {
+    #sm-add-bg {
       position:absolute;
       bottom:0px;left:0;
-
-
-    
-     }
-
-  
-
-    #border-top {
-      
-      position: absolute;
-      background-color: #999999;
-      width: 300px;
-      height: 1px;
-      top:0;
-      z-index: 999999;
-
     }
-     #border-bottom{
-      
-      position: absolute;
-      background-color: #999999;
-      width: 300px;
-      height: 1px;
-      bottom:0;
-      z-index: 999999;
 
-    }
-    #border-left {
-      position: absolute;
-      background-color: #999999;
-      width: 1px;
-      height: 250px;
-      left:0;
-      z-index: 999999;
-    }
-    #border-right {
-      position: absolute;
-      background-color: #999999;
-      width:1px;
-      height:250px;
-      left:299px;
-      z-index: 999999;
-    }
-    #white-mask  {
+  #white-mask  {
       position: absolute;
       top:0;
       left:0;
@@ -283,7 +241,6 @@
 
           
 
-             <!-- <div id="copy1"> </div> -->
 
         <div id="wrap-slide-1">
               
@@ -330,13 +287,8 @@
               <div id="cta"></div>
             </div>
           <!-- the end of logo lockup panel -->
-          <!-- borders -->
-              <div id="border-top"></div>
-              <div id="border-bottom"></div>
-              <div id="border-left"><div>
-              <div id="border-right"></div>
-          <!-- the end of borders -->
-        </div>
+
+        </div> <!-- the end of sm-ad -->
     
 
 
@@ -349,7 +301,9 @@
             // >> initialised our custom made Saatchi Masius banner
             //    attach it to the window scope.
             //    make initial setup, dont use jquery 
-            this.SMad = new SMBanner();
+            this.SMad = new SMBanner(300,250);
+
+            this.SMad.addBorder(300,250,"#999999","sm-add");
             this.SMad.init();
             this.SMad.renderCTA();
 
@@ -363,11 +317,12 @@
 
           // SM Banner //
 
-          SMBanner = function() {
+          SMBanner = function(w,h) {
 
             //this.canvas  = document.getElementById("sm-canvas");
             //this.ctx = this.canvas.getContext("2d");
-
+            this.bwidth =w;
+            this.bheight =h;
             this.rect = {x:0, y:0, width:10, height:10};
 
        
@@ -413,7 +368,7 @@
                     //console.log('lo', this)
                     }, onComplete:function () {
 
-                          //_self.showLockup();
+                          _self.showLockup();
                     }
                 });
        
@@ -484,6 +439,41 @@
           
 
           }
+          /* draw a border  */
+          SMBanner.prototype.addBorder  = function (w,h,color,id) {
+
+              
+              var divTop = document.createElement("DIV"); 
+              var divBottom = document.createElement("DIV"); 
+              var divLeft = document.createElement("DIV");
+              var divRight =  document.createElement("DIV");
+
+                  divTop.style.position  = divBottom.style.position =  divLeft.style.position= divRight.style.position = "absolute";
+                  divTop.style.background = divBottom.style.background = divLeft.style.background = divRight.style.background = color;
+                  divTop.style.zIndex = divBottom.style.zIndex = divLeft.style.zIndex = divRight.style.zIndex = '999999';  
+
+                  divTop.style.width =w+"px";
+                  divTop.style.height =1+"px";
+                  divTop.style.top ="0px";
+                  
+                  divBottom.style.width =w+"px";
+                  divBottom.style.height =1+"px";
+                  divBottom.style.bottom ="0px";
+                  
+                  divLeft.style.width =1+"px";
+                  divLeft.style.height =h+"px";
+                  divLeft.style.left ="0px";
+                  
+                  divRight.style.width =1+"px";
+                  divRight.style.height =h+"px";
+                  divRight.style.right ="0px";
+                  
+                  document.getElementById(id).appendChild(divTop);
+                  document.getElementById(id).appendChild(divBottom);
+                  document.getElementById(id).appendChild(divLeft);
+                  document.getElementById(id).appendChild(divRight);
+
+          }
 
           SMBanner.prototype.animate_slide1 = function () {
 
@@ -548,8 +538,17 @@
 
     }
 
-    SMSlide.prototype.animate = function() {
+    SMSlide.prototype.renderSlide = function () {
 
+      // rendering this slide and appending it to DOM
+
+    }
+
+    SMSlide.prototype.animate = function(c) {
+
+      //animating this slide and executing a callback at the end of animation
+      c();
+      
     }
 
 
