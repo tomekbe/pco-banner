@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding:0px;
+      font-family: Helvetica, Arial;
+    }
+
+    #sm-add  {
+      position:absolute;
+      overflow:hidden;
+      top:0:left:0;
+      width:300px;
+      height:250px;
+     
+     }
+
+     #sm-add-bg {
+      position:absolute;
+      bottom:0px;left:0;
+
+
+    
+     }
+
+  
+
+    #border-top {
+      
+      position: absolute;
+      background-color: #999999;
+      width: 300px;
+      height: 1px;
+      top:0;
+      z-index: 999999;
+
+    }
+     #border-bottom{
+      
+      position: absolute;
+      background-color: #999999;
+      width: 300px;
+      height: 1px;
+      bottom:0;
+      z-index: 999999;
+
+    }
+    #border-left {
+      position: absolute;
+      background-color: #999999;
+      width: 1px;
+      height: 250px;
+      left:0;
+      z-index: 999999;
+    }
+    #border-right {
+      position: absolute;
+      background-color: #999999;
+      width:1px;
+      height:250px;
+      left:299px;
+      z-index: 999999;
+    }
+    #white-mask  {
+      position: absolute;
+      top:0;
+      left:0;
+      width:300px;
+      height:250px;
+      z-index:100;
+
+    }
+    #logo-lockup {
+      position: absolute;
+      background: #FFFFFF;
+      top:250px;
+      left:0px;
+      width:300px;
+      height:70px;
+      z-index: 100000;
+    }
+    #logo {
+      position:absolute;
+      bottom:13px;
+      left:7px;
+
+    }
+
+    #cta {
+      z-index: 999999;
+      width:134px;
+      height:30px;
+      /*background-color: red;*/
+      position: absolute;
+      right:0px;
+      bottom:10px;
+      cursor: pointer;
+    }
+/* SLIDE 1 */
+#wrap-slide-1 ,#wrap-slide-2{
+  position:absolute;
+  top:0;
+  left:0;
+  width: 300px;
+  height:250px;
+  overflow:hidden;
+}
+  
+#slide1-a {
+      position: absolute;
+     
+      width:250px;  
+      height:50px;
+      top:40px;
+      left:-250px;
+      background-color: rgba(0,144,191,0.8);
+}
+#slide1-b {
+      position: absolute;
+      width:230px;  
+      height:60px;
+      top:90px;
+      left:-230px;
+      background-color: rgba(0,144,191,0.8);
+  
+}
+
+    #c1-a {
+
+      position: absolute;
+      overflow:hidden;
+     /*border:1px solid red;*/
+      width:0px;
+      top:10px;
+      left:5px;
+    }
+
+    #c1-b {
+
+      position: absolute;
+      overflow: hidden;
+      width:0px;
+      top:10px;
+      left:5px;
+    }
+
+/* SLIDE 2 */
+
+#slide2-a {
+      position: absolute;
+     
+      width:250px;  
+      height:50px;
+      top:40px;
+      left:-250px;
+      background-color: rgba(0,144,191,0.8);
+}
+#slide2-b {
+      position: absolute;
+      width:230px;  
+      height:60px;
+      top:90px;
+      left:-230px;
+      background-color: rgba(0,144,191,0.8);
+  
+}
+#slide2-c {
+      position: absolute;
+      width:230px;  
+      height:60px;
+      top:90px;
+      left:-230px;
+      background-color: rgba(0,144,191,0.8);
+  
+}
+
+#slide2-a {
+      position: absolute;
+     
+      width:140px;  
+      height:55px;
+      top:50px;
+      left:-140px;
+      background-color: rgba(0,144,191,0.8);
+}
+#slide2-b {
+      position: absolute;
+      width:210px;  
+      height:49px;
+      top:105px;
+      left:-210px;
+      background-color: rgba(0,144,191,0.8);
+  
+}
+#slide2-c {
+      position: absolute;
+      width:150px;  
+      height:50px;
+      top:154px;
+      left:-150px;
+      background-color: rgba(0,144,191,0.8);
+  
+}
+
+  #c2-a {
+
+      position: absolute;
+      overflow:hidden;
+     /*border:1px solid red;*/
+      width:0px;
+      top:10px;
+      left:10px;
+    }
+
+    #c2-b {
+
+      position: absolute;
+      overflow: hidden;
+      width:0px;
+      top:8px;
+      left:10px;
+    }
+     #c2-c {
+
+      position: absolute;
+      overflow: hidden;
+      width:0px;
+      top:7px;
+      left:10px;
+    }
+
+  </style>
+
+
+<!--
+  <script data-source="https://s0.2mdn.net/ads/studio/Enabler.js" data-exports-type="gwd-doubleclick" type="text/javascript" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+  
+  <script>
+    //append the script with polyline
+        Raphael.fn.polyline = function (x,y) {
+                var poly = ['M',x,y,'L'];
+                for (var i=2;i<arguments.length;i++) {
+                        poly.push(arguments[i]);
+                }
+                return this.path(poly.join(' '));
+        }
+  </script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
+
+
+
+</head>
+
+<body>
+ 
+
+
+
+
+      
+          
+        <div id="sm-add">
+          <img id='sm-add-bg' src="bg.jpg"></img>
+
+          <!-- white border -->
+            <div id="white-mask"></div>
+          <!-- the end of white border --     
+
+          <!-- animated stripes -->
+
+          
+
+             <!-- <div id="copy1"> </div> -->
+
+        <div id="wrap-slide-1">
+              
+              <div id="slide1-a">
+                                  <div id="c1-a"> <img src="copy/c1_a.svg"> </div>
+              </div>
+
+              <div id="slide1-b">
+                                  <div id="c1-b"> <img src="copy/c1_b.svg"> </div>
+              </div>
+
+        </div>
+
+        <div id="wrap-slide-2">
+
+              <div id="slide2-a"> 
+                                  <div id="c2-a"> <img src="copy/c2_a.svg"> </div>
+              </div>
+
+              <div id="slide2-b">
+                                   <div id="c2-b"> <img src="copy/c2_b.svg"> </div>
+              </div>
+            
+              <div id="slide2-c">
+                                   <div id="c2-c"> <img src="copy/c2_c.svg"> </div>
+              </div>
+
+
+        </div>
+        
+
+
+
+
+
+          
+          <!-- the end of animated stripes -->
+
+
+          <!-- logo lockup panel -->
+            <div id="logo-lockup">
+              <img id="logo" src="data:image/gif;base64,R0lGODlhiAAWAPcAACBGciFHcyJHcyNIdCNJdCRKdSVKdSZLdidMdipOeCpPeStPeSxQei1Rei5Sey9SezBTfDFUfTFVfTJVfjNWfjRXfzZYgDhagTlbgjpcgztcgzxdhD1ehD5fhT9fhUNjiERkiUZlikZmikdni0lojEppjUtqjUxqjk1rjk1sj05sj1BukFJvklRyk1ZzlFd0lVh0lVl1llt3mFx4mF15mV56mV96mmB7mmF8m2J8m2J9nGN+nWR/nWV/nmeBn2iBn2mDoGqEoWuEom6Ho2+HpHCIpHCJpXGJpXKKpnOLp3SMp3WMqHaNqHeOqXePqXiPqnqRq3uRrHySrH6UrX6Urn+VroGXr4KXsIOYsIWZsoWasoabs4ictImdtIqetYuftYyfto6huJCjuZGkuZKkupOmu5SmvJWnvJaovZepvZipvpmqvpqsv5ytwZ2uwZ6uwp+vwqCww6Gxw6GxxKKyxKOzxaS0xaW0xqa1x6e2x6i2yKi3yKm4yaq5yau5yqy6yq27y668zK+8zK+9zbG+zrK/zrPAz7TBz7XB0LbC0bbD0bfE0rjE0rnF07vG1L3I1b/K18HL2MLM2MPN2cTO2cTO2sbQ28fR3MjR3MnS3crT3cvT3svU3s3W387W4M/X4dLZ4tLa49Pb49Tb5NXc5Nfe5tje5tnf59ng59rh6Nvh6Nzi6d3j6eDl6+Dm7OHm7OPo7eTp7uXp7ubq7+fr8Ojs8eru8uzv8+3w8+7w9O7x9O/y9fDz9vHz9vL09/T2+PX2+PX3+fb4+ff4+vj5+/n6+/r7/Pv7/Pz8/fz9/f3+/v7+/v///yBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciBGciwAAAAAiAAWAEcI/wCZCRxIsKDBgwgTKlzIsKHDhxAL9gAAgBRBYRIAbEjGsBFFKw/nALgFgiIdg44APLJC8RLDFRRZRTQYh2KahYEojmBYzBUGimh4zWSWiwpFFLOOLVRmCwiAQMAGDvtpaOAxWCMoZtHVcBeVAhRbhCkkSZKfKh1+NPR1hKKEMqSCASt1ZoKGQg8PsVFAkYQRKD0uUPzQaaEoPS0oWojjaOGmOyIoLrClkFgHijD4jGr46AUADFLsJPIzxgYBjQ5jIUFAIYqeRXaaNADQAMwvgoRGifEC6ODEikMFegQA0iEeAL0EGqIIwpgyFi6WCVTSkiEFioOCDzRDMcbCUxSFaP8fT768+fPo06tfzz4GRYsEVVAsvHB4koduAAygyAnhKwQGUNQIQ8s4NQAlCU2hBUOFUMRGQmtQ5EEwAjmiSSSC3OHbe124UIIAEURBi0OXfPSQH8gx8wRFSxC0hQOUsQSASwrRQpED5c1AESELDUMRAMU0RMN72g3HBH4pCuTKAQAg0AAXBCUhIEO8/ASAE8qMNwRFKxiDUC4VAIAFe2SWaeaZaKapZkJuuLGHH37g0aYbehyCSkOSuEEHnHm4UcdCibjRhx9xTMIQKIL68YahDskyCBZF6KCDEFjEwQmFD/nCyBdF4MDDEWRAEmRBwsCBRx+hHJQYAJgMpIwaFEX/gKlCf1BUxEOwUnSEQmP8mEhDxhQBwAF1IGNQLSaIx5AfCAAABjEFASMjB60MhAgsQ/Txq0G/wTcQDxSB0hFFVSCJBUUlcGQQDhg0QZEkDBFiYkK9JKdQLw4AQEKWCC0DEwBmDLTIIYHgsiFwAtVyAwAOfNJQJPM2hGIvm1D0QC4EBZOBeDLSmNAxAQCQQHlbAoDIQq9QNIBDv7VSTCumjAhRJREvm2IvYQKQiUClDJCHQB0vVMuP9moXBEUBK1QMRRCwTGRwwxXXUH5FDwlAGXYUoMpAUgJgCUPnAvCBUtqtEnIAqSiUBkWeOOQZAA4H1yAA9znUBgAyC0QGRRkIbkMQEVMylIqVMphy0DJtL9RLZADc4ItBvCTmhLoLvfBCD5jX8MIcEaHxwg2Y7/DCDgtdAQPmObywyUCBnCCdQKnzgLkNL6jh0C1y+KBBswBAkAIUigzzkCpesAABRQyE8IQjlK/p/PPQRy99mQEBADs=">
+
+              <div id="cta"></div>
+            </div>
+          <!-- the end of logo lockup panel -->
+          <!-- borders -->
+              <div id="border-top"></div>
+              <div id="border-bottom"></div>
+              <div id="border-left"><div>
+              <div id="border-right"></div>
+          <!-- the end of borders -->
+        </div>
+    
+
+
+
+  <script type="text/javascript" id="gwd-init-code">
+          // >>>
+          window.onload = function() {
+
+
+            // >> initialised our custom made Saatchi Masius banner
+            //    attach it to the window scope.
+            //    make initial setup, dont use jquery 
+            this.SMad = new SMBanner();
+            this.SMad.init();
+            this.SMad.renderCTA();
+
+           // this.SMad.draw();
+
+        
+          } // the end of window.onLoad event 
+
+          // > > > > > //
+
+
+          // SM Banner //
+
+          SMBanner = function() {
+
+            //this.canvas  = document.getElementById("sm-canvas");
+            //this.ctx = this.canvas.getContext("2d");
+
+            this.rect = {x:0, y:0, width:10, height:10};
+
+       
+          } 
+
+          SMBanner.prototype.init = function () {
+
+            console.log("initialised");
+            _self = this;
+       
+          //  TweenLite.to(this.rect, 2, {x:100, y:100, width:100, height:100,  onUpdate:function() {_self.draw.call(_self)}});
+            this.addWhiteEdge();
+           
+            this.backgroundPosLoop();
+          }
+
+
+ 
+
+
+          SMBanner.prototype.addWhiteEdge = function() {
+
+              var el = document.getElementById("white-mask");
+
+              var el_paper = Raphael(el,300,250);
+              var white_edge = el_paper.path("M 300,250 0,250 0,240 290,240 290,10 0,10 0,0 300,0 z")
+              white_edge.attr({fill: '#FFFFFF','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_a'); 
+             // console.log(el_paper);
+
+                        white_edge.click( function() {console.log('sdjojojd')})
+          }
+
+    
+
+          SMBanner.prototype.backgroundPosLoop = function () {
+                
+                _self = this;
+                TweenLite.ticker.fps(60);
+             
+
+                TweenLite.to('#sm-add-bg', 9 , {  y:"40px",    z: 0.1,  rotationZ: 0.01, ease:Linear.easeNone, force3D:true
+                  , onUpdate:function() {
+                    //console.log('lo', this)
+                    }, onComplete:function () {
+
+                          //_self.showLockup();
+                    }
+                });
+       
+          }
+
+          SMBanner.prototype.renderCTA = function () {
+
+              var el = document.getElementById("cta");
+              
+              var rsr = Raphael(el, '134', '30');
+
+
+
+              var rect_b = rsr.rect(0, 0, 134, 30);
+                  rect_b.attr({x: '0',y: '0',fill: '#0090BF',stroke: '#0090BF',"stroke-miterlimit": '10','stroke-width': '1','stroke-opacity': '1'}).data('id', 'rect_b');
+              var group_a = rsr.set();
+
+              var path_c = rsr.path("M31.546,9.259h1.961v8.236h3.796v1.541h-5.757V9.259z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_c');
+              var path_d = rsr.path("M44.163,18.63c-0.687,0.378-1.471,0.574-2.479,0.574c-2.382,0-3.769-1.373-3.769-3.74   c0-2.087,1.107-3.81,3.349-3.81c2.675,0,3.432,1.835,3.432,4.356h-4.987c0.084,1.163,0.896,1.821,2.06,1.821   c0.91,0,1.694-0.336,2.396-0.729V18.63z M42.902,14.722c-0.057-0.91-0.477-1.695-1.527-1.695c-1.05,0-1.583,0.729-1.667,1.695   H42.902z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_d');
+              var path_e = rsr.path("M46.484,12.201c0.728-0.336,1.709-0.546,2.507-0.546c2.199,0,3.109,0.91,3.109,3.04v0.924   c0,0.729,0.015,1.275,0.028,1.807c0.015,0.546,0.042,1.05,0.084,1.611h-1.652c-0.07-0.378-0.07-0.854-0.084-1.079h-0.028   c-0.435,0.798-1.373,1.247-2.228,1.247c-1.274,0-2.521-0.771-2.521-2.143c0-1.079,0.519-1.709,1.233-2.059   c0.714-0.35,1.639-0.42,2.423-0.42h1.037c0-1.163-0.519-1.555-1.625-1.555c-0.799,0-1.598,0.308-2.228,0.785L46.484,12.201z    M48.684,17.832c0.574,0,1.022-0.252,1.316-0.645c0.308-0.406,0.393-0.924,0.393-1.485H49.58c-0.841,0-2.088,0.14-2.088,1.247   C47.492,17.566,48.011,17.832,48.684,17.832z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_e');
+              var path_f = rsr.path("M53.988,11.823h1.667v1.639h0.027c0.084-0.672,0.854-1.807,1.976-1.807c0.182,0,0.378,0,0.574,0.056v1.891   c-0.168-0.098-0.504-0.154-0.841-0.154c-1.526,0-1.526,1.905-1.526,2.941v2.647h-1.877V11.823z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_f');
+              var path_g = rsr.path("M59.642,11.823h1.778v0.98h0.028c0.588-0.826,1.387-1.148,2.367-1.148c1.709,0,2.451,1.205,2.451,2.83   v4.552H64.39v-3.852c0-0.882-0.014-2.073-1.219-2.073c-1.358,0-1.652,1.471-1.652,2.396v3.53h-1.877V11.823z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_g');
+              var path_h = rsr.path("M72.059,11.823h1.751v1.008h0.028c0.588-0.882,1.442-1.176,2.143-1.176c1.009,0,1.724,0.378,2.13,1.274   c0.434-0.868,1.372-1.274,2.255-1.274c1.779,0,2.283,1.219,2.283,2.83v4.552h-1.877v-4.3c0-0.672,0-1.625-1.079-1.625   c-1.246,0-1.4,1.485-1.4,2.423v3.502h-1.877v-4.3c0-0.672,0-1.625-1.079-1.625c-1.246,0-1.4,1.485-1.4,2.423v3.502h-1.877V11.823z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_h');
+              var path_i = rsr.path("M87.839,11.655c2.143,0,3.782,1.442,3.782,3.824c0,2.073-1.387,3.726-3.782,3.726   c-2.382,0-3.769-1.653-3.769-3.726C84.07,13.097,85.71,11.655,87.839,11.655z M87.839,17.748c1.442,0,1.821-1.289,1.821-2.494   c0-1.106-0.589-2.143-1.821-2.143c-1.219,0-1.807,1.064-1.807,2.143C86.032,16.445,86.41,17.748,87.839,17.748z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_i');
+              var path_j = rsr.path("M93.129,11.823h1.667v1.639h0.027c0.084-0.672,0.854-1.807,1.976-1.807c0.182,0,0.378,0,0.574,0.056v1.891   c-0.168-0.098-0.504-0.154-0.841-0.154c-1.526,0-1.526,1.905-1.526,2.941v2.647h-1.877V11.823z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_j');
+              var path_k = rsr.path("M104.068,18.63c-0.687,0.378-1.471,0.574-2.479,0.574c-2.382,0-3.769-1.373-3.769-3.74   c0-2.087,1.107-3.81,3.349-3.81c2.675,0,3.432,1.835,3.432,4.356h-4.987c0.084,1.163,0.896,1.821,2.06,1.821   c0.91,0,1.695-0.336,2.396-0.729V18.63z M102.808,14.722c-0.057-0.91-0.477-1.695-1.527-1.695s-1.583,0.729-1.667,1.695H102.808z").attr({fill: '#FFFFFF',parent: 'group_a','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_k');
+            group_a.attr({'name': 'group_a'});
+
+
+            var rsrGroups = [group_a];
+            group_a.push(
+             
+              path_c ,
+              path_d ,
+              path_e ,
+              path_f ,
+              path_g ,
+              path_h ,
+              path_i ,
+              path_j ,
+              path_k 
+            );
+              
+             //document.getElementById("cta").addEventListener('click', function() {console.log("s")})
+          rect_b.hover( function(e) {
+
+                this.animate({fill: '#ffffff'}, 200);
+                for(i=0;i<group_a.length;i++) {
+                      group_a[i].animate({fill:'#0090BF'}, 200);
+                  }
+
+            },function(e) {
+
+                this.animate({  fill: '#0090BF'}, 200);
+
+                  for(i=0;i<group_a.length;i++) {
+                    group_a[i].animate({fill:'#FFFFFF'}, 200);
+                  }
+                 //path_c.animate({fill:'#0090BF'}, 200);
+
+            }
+
+
+          ) // the end of hover
+  
+        
+          
+          
+
+          }
+
+          SMBanner.prototype.animate_slide1 = function () {
+
+                  TweenLite.to('#slide1-a', 0.5 , {  x:"250px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() {
+                     TweenLite.to('#c1-a', 0.3 , {  width:"250px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() { }});
+                }});
+                  
+                  TweenLite.to('#slide1-b', 0.5 , {  x:"230px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() {
+                       TweenLite.to('#c1-b', 0.3 , {  width:"230px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() { }});
+                }});
+
+
+                //hide the set of 
+                setTimeout(function () {
+
+                       TweenLite.to('#wrap-slide-1', 0.4 , {  y:"-300px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Power2.easeInOut, force3D:true});
+                       
+                }, 3000);
+          }
+
+
+          SMBanner.prototype.animate_slide2 = function () {
+
+                 TweenLite.to('#slide2-a', 0.5 , {  x:"140px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() {
+                     TweenLite.to('#c2-a', 0.3 , {  width:"140px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() { }});
+                }});
+                  
+                  TweenLite.to('#slide2-b', 0.5 , {  x:"210px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() {
+                       TweenLite.to('#c2-b', 0.3 , {  width:"210px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() { }});
+                }});
+
+                 TweenLite.to('#slide2-c', 0.5 , {  x:"150px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() {
+                       TweenLite.to('#c2-c', 0.3 , {  width:"150px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() { }});
+                }});
+
+          }
+
+          SMBanner.prototype.resetBanner = function () {
+
+            // reset the banner to its initial values;
+
+            TweenLite.to('#wrap-slide-1', 0 , {  y:"0px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Power2.easeInOut, force3D:true});
+
+            TweenLite.to('#slide1-a', 0 , {  x:"-250px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Power2.easeInOut, force3D:true});
+            TweenLite.to('#c1-a', 0 , {  width:"0px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Power2.easeInOut, force3D:true});
+            TweenLite.to('#slide1-b', 0 , {  x:"-230px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Power2.easeInOut, force3D:true});
+            TweenLite.to('#c1-b', 0 , {  width:"0px", delay:0.1,   z: 0.1,  rotationZ: 0.01, ease:Power2.easeInOut, force3D:true});
+
+          }
+
+
+          SMBanner.prototype.showLockup = function () {
+
+             TweenLite.to('#logo-lockup', 1 , {  y:"-70px",    z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true, onUpdate:function() {
+                    //console.log('lo', this)
+                }});
+       
+        }
+    // 
+
+    SMSlide = function (){
+
+    }
+
+    SMSlide.prototype.animate = function() {
+
+    }
+
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>
