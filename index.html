@@ -532,20 +532,39 @@
                 }});
        
         }
-    // 
+    
+    //  
 
     SMSlide = function (){
 
+      // each slide consists of the several strips
+      this.strips = [];
+      this.slide = "";
+
     }
 
-    SMSlide.prototype.renderSlide = function () {
+    SMSlide.prototype.addStrip = function (o) {
 
       var wrap = document.createElement("DIV");
 
+      this.strips.push(o);
 
 
       // rendering this slide and appending it to DOM
 
+    }
+
+    SMSlide.prototype.renderSlide = function() {
+      // iterate through and append to dom
+      var _wrap = document.createElement("DIV");
+      
+      for(var i=0;i<this.strips.length;i++) {
+
+        var str = this.strips[i].renderHTML();
+        _wrap.appendChild(str);  
+      
+      }
+       document.getElementById('sm-add').appendChild(_wrap);
     }
 
     SMSlide.prototype.animate = function(c) {
