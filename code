@@ -1,0 +1,7 @@
+slide1 = new SMSlide(40);
+
+slide1.addStrip(new SMSlideStrip("copy/c1_a.svg",300,54,"red",0,3));
+slide1.addStrip(new SMSlideStrip("copy/c1_b.svg",260,63,"green",0,3))
+slide1.addStrip(new SMSlideStrip("copy/c1_b.svg",260,49,"blue",0,3))
+
+slide1.renderSlide()
