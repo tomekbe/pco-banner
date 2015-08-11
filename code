@@ -5,6 +5,4 @@ slide1.addStrip(new SMSlideStrip("copy/c1_b.svg",250,53,"green",5,8,0.5))
 slide1.addStrip(new SMSlideStrip("copy/c1_b.svg",240,49,"blue",5,10,0.6))
 
 slide1.renderSlide()
-
-
 slide1.animateSlide();
