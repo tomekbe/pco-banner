@@ -195,6 +195,11 @@
       left:10px;
     }
 
+
+  .strip {
+    background-color: rgba(0,144,191,0.8);
+  }
+
   </style>
 
 
@@ -323,7 +328,9 @@
               white_edge.attr({fill: '#FFFFFF','stroke-width': '0','stroke-opacity': '1'}).data('id', 'path_a'); 
              // console.log(el_paper);
 
-                        white_edge.click( function() {console.log('sdjojojd')})
+              white_edge.click( function() {console.log('sdjojojd')})
+          
+
           }
 
     
@@ -504,7 +511,7 @@
        
         }
     
-    //  
+    // >SMSlide 
 
     SMSlide = function (_topOffset){
 
@@ -538,7 +545,7 @@
       
       for(var i=0;i<this.strips.length;i++) {
 
-              var str = this.strips[i].renderHTML();
+             var str = this.strips[i].renderHTML();
              if(i!=0) {
                 this.strips[i].offsetFromTop(parseInt(this.strips[i-1].strip_offset_top) +parseInt(this.strips[i-1].strip_height) );
                 //console.log(this.strips[i].strip_height, "this is height");
@@ -553,19 +560,39 @@
        document.getElementById('sm-add').appendChild(_wrap);
     }
 
-    SMSlide.prototype.animate = function(c) {
+    SMSlide.prototype.animateSlide = function() {
 
       //animating this slide and executing a callback at the end of animation
-      c();
+      var  _strips = this.strips;
+      
+      for(var i=0; i<this.strips.length;i++) {
+          
+          this.strips[i].unmask();
+          this.strips[i].animate_strip()
+          
+          //setTimeout(f1 ,300);
+          //setTimeout(f2, 300);
+      
+      }
+
+      //c();
       
     }
 
 
     // SMSlideStrip 
+    // _imgSvg  - source SVG of the text
+    // sw - strip width 
+    // sh - strip height
+    // sc - strip colour
+    // _xoffset - offset from the left of the text in the box
+    // _yoffset - offset from the top of the text in the box
+    // _delay - delay 
 
-    SMSlideStrip = function (_imgSvg, sw, sh, sc, _xoffset, _yoffset) {
+    SMSlideStrip = function (_imgSvg, sw, sh, sc, _xoffset, _yoffset, _delay) {
 
       this.strip="";
+      this.masker="";
 
       this.imgsrc=_imgSvg;
       this.strip_width = sw;
@@ -574,8 +601,10 @@
       this.strip_colour =sc;
       this.strip_offset_top = "";
 
-      this.copy_xoffset = _xoffset || 0;
-      this.copy_yoffset = _yoffset || 0;
+      this.copy_xoffset = _xoffset ;
+      this.copy_yoffset =  _yoffset ;
+
+      this.delay  = _delay;
       
 
     }
@@ -586,10 +615,19 @@
     
     }
 
+
+    SMSlideStrip.prototype.animate_strip = function () {
+        var _self = this;
+        TweenLite.to(_self.strip , 0.1 , {  x:_self.strip_width, delay:_self.delay,  z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true });
+    }
+
+
     SMSlideStrip.prototype.unmask  = function (c) {
       // unmask and play some callback;
-      console.log(this);
-    
+      var _self = this;
+      var _masker = this.masker;
+      
+      TweenLite.to(_masker , 0.3 , {  width:this.strip_width,delay:this.delay*1.6,   z: 0.1,  rotationZ: 0.01, ease:Expo.easeIn, force3D:true });
 
     }
 
@@ -624,13 +662,15 @@
       _html.style.position  = _c.style.position  = "absolute";
       _html.style.width = this.strip_width +"px";
       _html.style.height = this.strip_height +"px";
-      _html.style.background = this.strip_colour;
+      //_html.style.background = this.strip_colour;
+      _html.style.left = -this.strip_width +"px";
 
       _c.style.overflow ="hidden"; 
       _c.style.width = "0px";
 
-      _c.style.top = this.copy_xoffset;
-      _c.style.left = this.copy_yoffset;
+      // offset the text in the container
+      _c.style.top = this.copy_xoffset +"px";
+      _c.style.left = this.copy_yoffset +"px";
 
       _img.src = this.imgsrc;
 
@@ -639,6 +679,7 @@
       _html.appendChild(_c);
 
       this.strip = _html;
+      this.masker = _c;
 
       return _html;
     }
