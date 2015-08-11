@@ -62,138 +62,6 @@
       bottom:10px;
       cursor: pointer;
     }
-/* SLIDE 1 */
-#wrap-slide-1 ,#wrap-slide-2{
-  position:absolute;
-  top:0;
-  left:0;
-  width: 300px;
-  height:250px;
-  overflow:hidden;
-}
-  
-#slide1-a {
-      position: absolute;
-     
-      width:250px;  
-      height:50px;
-      top:40px;
-      left:-250px;
-      background-color: rgba(0,144,191,0.8);
-}
-#slide1-b {
-      position: absolute;
-      width:230px;  
-      height:60px;
-      top:90px;
-      left:-230px;
-      background-color: rgba(0,144,191,0.8);
-  
-}
-
-    #c1-a {
-
-      position: absolute;
-      overflow:hidden;
-     /*border:1px solid red;*/
-      width:0px;
-      top:10px;
-      left:5px;
-    }
-
-    #c1-b {
-
-      position: absolute;
-      overflow: hidden;
-      width:0px;
-      top:10px;
-      left:5px;
-    }
-
-/* SLIDE 2 */
-
-#slide2-a {
-      position: absolute;
-     
-      width:250px;  
-      height:50px;
-      top:40px;
-      left:-250px;
-      background-color: rgba(0,144,191,0.8);
-}
-#slide2-b {
-      position: absolute;
-      width:230px;  
-      height:60px;
-      top:90px;
-      left:-230px;
-      background-color: rgba(0,144,191,0.8);
-  
-}
-#slide2-c {
-      position: absolute;
-      width:230px;  
-      height:60px;
-      top:90px;
-      left:-230px;
-      background-color: rgba(0,144,191,0.8);
-  
-}
-
-#slide2-a {
-      position: absolute;
-     
-      width:140px;  
-      height:55px;
-      top:50px;
-      left:-140px;
-      background-color: rgba(0,144,191,0.8);
-}
-#slide2-b {
-      position: absolute;
-      width:210px;  
-      height:49px;
-      top:105px;
-      left:-210px;
-      background-color: rgba(0,144,191,0.8);
-  
-}
-#slide2-c {
-      position: absolute;
-      width:150px;  
-      height:50px;
-      top:154px;
-      left:-150px;
-      background-color: rgba(0,144,191,0.8);
-  
-}
-
-  #c2-a {
-
-      position: absolute;
-      overflow:hidden;
-     /*border:1px solid red;*/
-      width:0px;
-      top:10px;
-      left:10px;
-    }
-
-    #c2-b {
-
-      position: absolute;
-      overflow: hidden;
-      width:0px;
-      top:8px;
-      left:10px;
-    }
-     #c2-c {
-
-      position: absolute;
-      overflow: hidden;
-      width:0px;
-      top:7px;
-      left:10px;
-    }
 
 
   .strip {
@@ -306,26 +174,25 @@
 
           slide3.setAsLast();
 
-          this.SMad.kolejka.push(slide1); this.SMad.kolejka.push(slide2); this.SMad.kolejka.push(slide3);
+          this.SMad.kolejka.push(slide1,slide2,slide3); 
 
-          
-          //slide2.animateSlide(this.SMad.playQ);
 
-          //this.SMad.kolejka[0].animateSlide(this.SMad.playQ.call(this.SMad))
-          
-          //this.SMad.playQ();
+
           var _self = this.SMad;
           
           // will loop  through all the queed slides
+          // at the last slide it plays the end
+          
           var f  = function () {
         
              _self.currentSlide++;
 
              if( _self.currentSlide<=_self.kolejka.length -1) {
-                 _self.kolejka[_self.currentSlide].animateSlide(f);
-                 console.log("smaller",_self.currentSlide,_self.kolejka.length-1);
+                    
+                     _self.kolejka[_self.currentSlide].animateSlide(f);
+                
               } else {
-                    console.log("bigger",_self.currentSlide,_self.kolejka.length-1);
+                    
                     _self.theEnd();
 
               }
